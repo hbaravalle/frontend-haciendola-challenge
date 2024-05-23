@@ -1,3 +1,0 @@
-function Token() {
-  return;
-}

@@ -1,52 +1,27 @@
 import { Link } from "react-router-dom";
 import styles from "./Register.module.scss";
-import classNames from "classnames";
+import FormLayout from "../../Layouts/Form/FormLayout";
+import FormGroup from "../../components/FormGroup/FormGroup";
 
 function Register() {
   return (
-    <div className={styles.mainWrapper}>
-      <div className={classNames(styles.register, "shadow-sm")}>
-        <div className={styles.register__logo}>
-          <img src="/logo.png" alt="Haciéndola logo" />
-        </div>
-        <form action="" className={styles.register__form}>
-          <div className={styles.register__formGroup}>
-            <label htmlFor="" className={styles.register__formLabel}>
-              Name
-            </label>
-            <input type="text" className={styles.register__formInput} />
-          </div>
-          <div className={styles.register__formGroup}>
-            <label htmlFor="" className={styles.register__formLabel}>
-              Username
-            </label>
-            <input type="text" className={styles.register__formInput} />
-          </div>
-          <div className={styles.register__formGroup}>
-            <label htmlFor="" className={styles.register__formLabel}>
-              Email address
-            </label>
-            <input type="text" className={styles.register__formInput} />
-          </div>
-          <div className={styles.register__formGroup}>
-            <label htmlFor="" className={styles.register__formLabel}>
-              Password
-            </label>
-            <input type="text" className={styles.register__formInput} />
-          </div>
-          <div className={styles.register__formGroup}>
-            <label htmlFor="" className={styles.register__formLabel}>
-              Repeat password
-            </label>
-            <input type="text" className={styles.register__formInput} />
-          </div>
-          <button type="submit">Sign up</button>
-        </form>
-        <small>
-          Already have and account? <Link to="/login">Sign in</Link>
-        </small>
-      </div>
-    </div>
+    <FormLayout>
+      <form action="" className={styles.formLayout__form}>
+        <FormGroup title="Name" name="name" />
+        <FormGroup title="Username" name="username" />
+        <FormGroup title="Email address" name="email" type="email" />
+        <FormGroup title="Password" name="password" type="password" />
+        <FormGroup
+          title="Confirm password"
+          name="repassword"
+          type="repassword"
+        />
+        <button type="submit">Sign up</button>
+      </form>
+      <small>
+        Already have and account? <Link to="/login">Sign in</Link>
+      </small>
+    </FormLayout>
   );
 }
 

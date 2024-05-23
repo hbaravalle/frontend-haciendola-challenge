@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ProductList from "./pages/ProductList/ProductList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import FormWizard from "./pages/FormWizard";
+import ResetPassword from "./pages/ResetPassword";
 
 import "./App.scss";
 
@@ -13,7 +13,7 @@ function App() {
       <Route path="/" element={<ProductList />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/forgot-password/:step?" element={<FormWizard />} />
+      <Route path="/forgot-password/:step?" element={<ResetPassword />} />
     </Routes>
   );
 }

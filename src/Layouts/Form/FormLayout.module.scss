@@ -8,7 +8,7 @@
   font-size: 0.875rem;
 }
 
-.login {
+.formLayout {
   max-width: 400px;
   background-color: #fff;
   padding: 2rem;
@@ -30,50 +30,10 @@
     }
   }
 
-  &__form {
+  form {
     margin: 2rem 0;
   }
-  &__formGroup {
-    margin-bottom: 1rem;
-  }
-  &__formLabel {
-    width: 100%;
-    display: inline-block;
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-  }
-  &__formInput {
-    width: 100%;
-    border: 1px solid $color-border;
-    border-radius: $border-radius;
-    padding: 0.2rem 0.4rem;
-    outline: 0px solid transparent;
-    transition: outline 0.2s ease-in-out;
 
-    &:focus {
-      outline: 1px solid $color-accent-alternative;
-    }
-  }
-  &__otpWrapper {
-    display: flex;
-    justify-content: space-between;
-
-    input {
-      width: 3rem;
-      border: 1px solid $color-border;
-      border-radius: $border-radius;
-      text-align: center;
-      font-size: 1.3rem;
-      padding: 0.2rem 0.4rem;
-      outline: 0px solid transparent;
-      transition: outline 0.2s ease-in-out;
-      aspect-ratio: 1 / 1;
-
-      &:focus {
-        outline: 1px solid $color-accent-alternative;
-      }
-    }
-  }
   button {
     display: inline-block;
     width: 100%;

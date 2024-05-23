@@ -1,10 +1,10 @@
-// react-hot-toast
+import classNames from "classnames";
+import { Link, useParams } from "react-router-dom";
 
-function ResetPassword() {
-  // 1. Email
-  // 2. Token
-  // 3. New password + Repeat password
-  // 4. Redirect login
+function FormLayout() {
+  const { step } = useParams();
+
+  return <div className={styles.mainWrapper}></div>;
 }
 
-export default ResetPassword;
+export default FormLayout;
