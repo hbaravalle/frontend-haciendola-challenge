@@ -5,18 +5,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.875rem;
 }
 
-.register {
+.login {
   max-width: 400px;
   background-color: #fff;
   padding: 2rem;
   border-radius: $border-radius;
 
+  p {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
   &__logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1.5rem;
 
     img {
       max-width: 150px;
@@ -47,19 +54,52 @@
       outline: 1px solid $color-accent-alternative;
     }
   }
-  button[type="submit"] {
+  &__otpWrapper {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      width: 3rem;
+      border: 1px solid $color-border;
+      border-radius: $border-radius;
+      text-align: center;
+      font-size: 1.3rem;
+      padding: 0.2rem 0.4rem;
+      outline: 0px solid transparent;
+      transition: outline 0.2s ease-in-out;
+      aspect-ratio: 1 / 1;
+
+      &:focus {
+        outline: 1px solid $color-accent-alternative;
+      }
+    }
+  }
+  button {
     display: inline-block;
     width: 100%;
-    border: none;
-    background-color: $color-accent-alternative;
-    color: white;
     border-radius: $border-radius;
     padding: 0.5rem;
     margin-top: 0.5rem;
     font-size: 0.875rem;
+
+    border: none;
+    &[type="submit"] {
+      background-color: $color-accent-alternative;
+      color: white;
+    }
+    &.secondary {
+      background-color: lighten($color-accent-alternative, 50%);
+      color: $color-accent-alternative;
+    }
   }
 
   small {
     font-size: 0.875rem;
+
+    &.forgot {
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+    }
   }
 }

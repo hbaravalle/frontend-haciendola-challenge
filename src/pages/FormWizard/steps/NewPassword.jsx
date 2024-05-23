@@ -1,0 +1,3 @@
+function NewPassword() {
+  return;
+}
