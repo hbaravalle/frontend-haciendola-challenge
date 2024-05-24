@@ -68,6 +68,35 @@ En caso de haber ejecutado los seeders del proyecto backend, se habrán creado t
 
 > La contraseña de estos usuarios será la que se haya configurado en las variables de entorno de la API.
 
+## Reset de contraseña
+
+Para probar el reseteo de contraseña, se puede utilizar Mailtrap en modo test. A continuación, se indican los pasos a seguir:
+
+1. Crear una cuenta en Mailtrap.
+
+2. Configurar Mailtrap en el proyecto. Generalmente, esto implica establecer las credenciales de Mailtrap en las variables de entorno de la API. Ejemplo de los datos que se pueden encontrar:
+
+```
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=tu_username_mailtrap
+MAIL_PASSWORD=tu_password_mailtrap
+MAIL_FROM_ADDRESS=no-reply@tu-dominio.com
+MAIL_FROM_NAME="Tu Proyecto"
+```
+
+3. Ejecutar (desde el Frontend) el proceso de reseteo de contraseña desde tu aplicación:
+4. Revisar la bandeja de entrada en Mailtrap para verificar que el correo de reseteo de contraseña haya sido enviado y recibido correctamente.
+
+### Video del funcionamiento
+
+De esta manera, se podrá probar la funcionalidad de reseteo de contraseña sin necesidad de enviar correos electrónicos reales, asegurando el funcione correctamente en un entorno controlado.
+
+## En desarrollo
+[ ] Sumar validaciones
+[ ] Detalles de diseño
+[ ] Refactorización y modularización del componente ProductList
+
 ---
 
 ¡Gracias por la oportunidad!
