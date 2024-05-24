@@ -30,8 +30,8 @@ Sigue estos pasos para ejecutar (localmente) la aplicación de React:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
+git clone https://github.com/hbaravalle/frontend-haciendola-challenge
+cd frontend-haciendola-challenge
 ```
 
 ### 2. Instalar dependencias
