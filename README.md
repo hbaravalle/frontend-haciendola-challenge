@@ -50,7 +50,23 @@ Ejecuta el siguiente comando para iniciar la aplicación en modo de desarrollo:
 npm run dev
 ```
 
-La aplicación debería abrirse automáticamente en tu navegador predeterminado.
+### 4. Usuarios de prueba
+
+En caso de haber ejecutado los seeders del proyecto backend, se habrán creado tres usuarios de prueba:
+
+#### Leia Organa
+- username: leiaorgana
+- email: leia@starwars.com
+
+#### Luke Skywalker
+- username: lukeskywalker
+- email: luke@starwars.com
+
+#### Han Solo
+- username: hansolo
+- email: han@starwars.com
+
+> La contraseña de estos usuarios será la que se haya configurado en las variables de entorno de la API.
 
 ---
 
