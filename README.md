@@ -14,7 +14,7 @@ Tener instalados Node y NPM:
 
 - [X] Login de usuario
 - [X] Registro de usuario
-- [X] Recupero de contraseña a través de código de único uso por mail
+- [X] Recupero de contraseña a través de código de único uso por mail (solo en modo test con Mailtrap.io)
 
 ### Productos
 
