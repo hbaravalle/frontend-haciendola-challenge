@@ -41,15 +41,11 @@
     padding: 0.5rem;
     margin-top: 0.5rem;
     font-size: 0.875rem;
-
     border: none;
+
     &[type="submit"] {
       background-color: $color-accent-alternative;
       color: white;
-    }
-    &.secondary {
-      background-color: lighten($color-accent-alternative, 50%);
-      color: $color-accent-alternative;
     }
   }
 

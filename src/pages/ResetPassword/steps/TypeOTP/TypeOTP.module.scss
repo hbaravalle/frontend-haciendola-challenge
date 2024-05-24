@@ -1,4 +1,6 @@
-&__otpWrapper {
+@import "../../../../scss/variables.scss";
+
+.otpWrapper {
   display: flex;
   justify-content: space-between;
 

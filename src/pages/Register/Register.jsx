@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Register.module.scss";
 import FormLayout from "../../Layouts/Form/FormLayout";
-import FormGroup from "../../components/FormGroup/FormGroup";
+import FormGroup from "../../components/FormGroup";
 
 function Register() {
   return (

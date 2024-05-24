@@ -1,6 +1,9 @@
 @import "../../scss/variables.scss";
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   width: 200px;
   border-right: 1px solid $color-border;

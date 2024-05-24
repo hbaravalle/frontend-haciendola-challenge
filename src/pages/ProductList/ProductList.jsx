@@ -1,7 +1,9 @@
 import { Eye, Trash, Tag } from "feather-icons-react";
 import { Tooltip } from "react-tooltip";
+import { Modal } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import Paginate from "../../components/Paginate";
+import FormGroup from "../../components/FormGroup";
 import styles from "./ProductList.module.scss";
 import { useEffect, useState } from "react";
 
@@ -11,9 +13,29 @@ function ProductList() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
+  const [editModal, setEditModal] = useState({
+    active: false,
+  });
+
+  const [deleteModal, setDeleteModal] = useState({
+    active: false,
+  });
+
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
+  };
+
+  const handleCloseEditModal = () => setEditModal({ active: false });
+  const handleShowEditModal = (product) => {
+    setEditModal({ active: true, ...product });
+    console.log({ active: true, ...product });
+  };
+
+  const handleCloseDeleteModal = () => setDeleteModal({ active: false });
+  const handleShowDeleteModal = (product) => {
+    // Delete
+    setDeleteModal({ active: true, ...product });
   };
 
   const paginateProps = { currentPage, totalPages, handlePageChange };
@@ -101,6 +123,9 @@ function ProductList() {
                                       <span
                                         data-tooltip-id={`tooltip-detail-${product.id}`}
                                         data-tooltip-content={"Detail"}
+                                        onClick={() =>
+                                          handleShowEditModal(product)
+                                        }
                                       >
                                         <Eye size="16" />
                                       </span>
@@ -114,6 +139,9 @@ function ProductList() {
                                       <span
                                         data-tooltip-id={`tooltip-delete-${product.id}`}
                                         data-tooltip-content={"Delete"}
+                                        onClick={() =>
+                                          handleShowDeleteModal(product)
+                                        }
                                       >
                                         <Trash size="16" />
                                       </span>
@@ -143,6 +171,39 @@ function ProductList() {
           </div>
         </main>
       </div>
+      <Modal show={editModal.active} onHide={handleCloseEditModal}>
+        {/* <Modal.Header closeButton></Modal.Header> */}
+        <form action="" style={{ padding: "1rem", fontSize: "0.875rem" }}>
+          <FormGroup title="Title" name="title" value={editModal.title} />
+          <FormGroup title="Handle" name="handle" value={editModal.handle} />
+          <FormGroup
+            title="Description"
+            name="description"
+            value={editModal.description}
+            type="textarea"
+          />
+          <FormGroup title="SKU" name="sku" value={editModal.sku} />
+          <FormGroup title="Grams" name="grams" value={editModal.grams} />
+          <FormGroup title="Stock" name="stock" value={editModal.stock} />
+          <FormGroup title="Price" name="price" value={editModal.price} />
+          <FormGroup
+            title="Compare price"
+            name="compare_price"
+            value={editModal.compare_price}
+          />
+          <FormGroup title="Barcode" name="barcode" value={editModal.barcode} />
+        </form>
+        <button onClick={handleCloseEditModal}>Close</button>
+        <button>Save changes</button>
+      </Modal>
+      <Modal show={deleteModal.active} onHide={handleCloseDeleteModal}>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum natus
+          eos impedit iste architecto culpa numquam tenetur aliquam eaque minus?
+        </p>
+        <button onClick={handleCloseDeleteModal}>Close</button>
+        <button>Save changes</button>
+      </Modal>
     </>
   );
 }
