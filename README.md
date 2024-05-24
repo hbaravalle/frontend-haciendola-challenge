@@ -90,6 +90,8 @@ MAIL_FROM_NAME="Tu Proyecto"
 
 ### Video del funcionamiento
 
+https://github.com/hbaravalle/frontend-haciendola-challenge/assets/24690415/e31c855c-2cac-4741-bf0a-614b410a6fc1
+
 De esta manera, se podrá probar la funcionalidad de reseteo de contraseña sin necesidad de enviar correos electrónicos reales, asegurando el funcione correctamente en un entorno controlado.
 
 ## En desarrollo
