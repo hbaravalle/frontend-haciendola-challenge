@@ -96,6 +96,8 @@ De esta manera, se podrá probar la funcionalidad de reseteo de contraseña sin 
 - [ ] Sumar validaciones
 - [ ] Detalles de diseño
 - [ ] Refactorización y modularización del componente ProductList
+- [ ] Refactorización y modularización general
+- [ ] customHooks
 
 ---
 
