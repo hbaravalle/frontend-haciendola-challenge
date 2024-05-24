@@ -93,9 +93,9 @@ MAIL_FROM_NAME="Tu Proyecto"
 De esta manera, se podrá probar la funcionalidad de reseteo de contraseña sin necesidad de enviar correos electrónicos reales, asegurando el funcione correctamente en un entorno controlado.
 
 ## En desarrollo
-[ ] Sumar validaciones
-[ ] Detalles de diseño
-[ ] Refactorización y modularización del componente ProductList
+- [ ] Sumar validaciones
+- [ ] Detalles de diseño
+- [ ] Refactorización y modularización del componente ProductList
 
 ---
 
