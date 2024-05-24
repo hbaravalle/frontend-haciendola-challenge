@@ -1,8 +1,57 @@
-# React + Vite
+![portada_haciendola](https://github.com/hbaravalle/backend-haciendola-challenge/assets/24690415/43f3f53c-3178-470e-8103-b52938d38821)
+# [Frontend] Challenge Full Stack, Haciendola
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerrequisitos
 
-Currently, two official plugins are available:
+Tener instalados Node y NPM:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Node.js](https://nodejs.org/es/download/)
+- [npm](https://www.npmjs.com/get-npm) (Node Package Manager)
+
+## Funcionalidades de la Aplicación
+
+### Autenticación
+
+- [X] Login de usuario
+- [X] Registro de usuario
+- [X] Recupero de contraseña a través de código de único uso por mail
+
+### Productos
+
+- [X] Listado de productos con paginación
+- [X] Crear un producto
+- [X] Editar un producto
+- [X] Borrar (soft) un producto
+
+## Primeros Pasos
+
+Sigue estos pasos para ejecutar (localmente) la aplicación de React:
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/tu-repo.git
+cd tu-repo
+```
+
+### 2. Instalar dependencias
+
+Navega al directorio del proyecto y ejecuta:
+
+```bash
+npm install
+```
+
+### 3. Iniciar la aplicación
+
+Ejecuta el siguiente comando para iniciar la aplicación en modo de desarrollo:
+
+```bash
+npm start
+```
+
+La aplicación debería abrirse automáticamente en tu navegador predeterminado.
+
+---
+
+¡Gracias por la oportunidad!
