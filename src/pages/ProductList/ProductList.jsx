@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Eye, Trash, Tag } from "feather-icons-react";
 import { Tooltip } from "react-tooltip";
 import { Modal } from "react-bootstrap";
@@ -52,7 +53,7 @@ function ProductList() {
   const handleNewGramsChange = (e) => setNewGrams(e.target.value);
   const handleNewStockChange = (e) => setNewStock(e.target.value);
   const handleNewPriceChange = (e) => setNewPrice(e.target.value);
-  const handleNewComparePriceChange = (e) => setComparePrice(e.target.value);
+  const handleNewComparePriceChange = (e) => setNewComparePrice(e.target.value);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleHandleChange = (e) => setHandle(e.target.value);
@@ -64,12 +65,16 @@ function ProductList() {
   const handlePriceChange = (e) => setPrice(e.target.value);
   const handleComparePriceChange = (e) => setComparePrice(e.target.value);
 
+  const token = useSelector((state) => state.auth.token);
+
   const handleProductCreate = async () => {
+    console.log("OK OK");
     try {
       const response = await fetch(`http://localhost:3000/api/products`, {
         method: "post",
         headers: {
           "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: newTitle,
@@ -86,7 +91,7 @@ function ProductList() {
       if (data.status === 500 || data.status === 404) {
         toast.error("Failed to create product");
       }
-      if (data.status === 200) {
+      if (data.status === 201) {
         toast.success("Product created");
         fetchProducts(currentPage);
         handleCloseCreateModal();
@@ -105,6 +110,7 @@ function ProductList() {
           method: "delete",
           headers: {
             "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -131,6 +137,7 @@ function ProductList() {
           method: "put",
           headers: {
             "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             title,
@@ -200,11 +207,17 @@ function ProductList() {
 
   const fetchProducts = async (page) => {
     try {
+      console.log(token);
       const response = await fetch(
-        `http://localhost:3000/api/products?page=${page}`
+        `http://localhost:3000/api/products?page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const { result: data } = await response.json();
-
+      console.log(data);
       setProducts(data.products);
       setTotalPages(data.totalPages);
       setTotalProducts(data.count);
