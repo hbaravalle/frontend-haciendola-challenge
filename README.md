@@ -47,7 +47,7 @@ npm install
 Ejecuta el siguiente comando para iniciar la aplicación en modo de desarrollo:
 
 ```bash
-npm start
+npm run dev
 ```
 
 La aplicación debería abrirse automáticamente en tu navegador predeterminado.
