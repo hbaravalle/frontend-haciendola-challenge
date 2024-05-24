@@ -22,4 +22,16 @@
       outline: 1px solid $color-accent-alternative;
     }
   }
+  &__textarea {
+    width: 100%;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    padding: 0.2rem 0.4rem;
+    outline: 0px solid transparent;
+    transition: outline 0.2s ease-in-out;
+
+    &:focus {
+      outline: 1px solid $color-accent-alternative;
+    }
+  }
 }

@@ -6,7 +6,6 @@ import TypeOTP from "./steps/TypeOTP";
 
 function ResetPassword() {
   const { step } = useParams();
-  console.log(step);
 
   return (
     <FormLayout>

@@ -47,6 +47,10 @@
       background-color: $color-accent-alternative;
       color: white;
     }
+
+    &:disabled {
+      background-color: #999;
+    }
   }
 
   small {

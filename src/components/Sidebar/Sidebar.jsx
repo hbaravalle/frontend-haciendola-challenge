@@ -1,7 +1,23 @@
 import { Package, Power } from "feather-icons-react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { login } from "../../redux/authSlice";
+
 import styles from "./Sidebar.module.scss";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(login({}));
+    toast("Hope to see you soon!", {
+      icon: "👋",
+    });
+    navigate("/login");
+  };
+
   return (
     <div className={styles.sidebar}>
       <div>
@@ -30,7 +46,7 @@ function Sidebar() {
           </ul>
         </nav>
       </div>
-      <button>
+      <button onClick={handleLogout}>
         <Power /> Logout
       </button>
     </div>
