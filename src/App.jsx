@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import ProductList from "./pages/ProductList/ProductList";
+import ProductListFormik from "./pages/ProductList/ProductListFormik";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
@@ -24,7 +24,7 @@ function App() {
         />
         <Route path="/auth/new-password" element={<NewPassword />} />
         <Route element={<ProtectedRoute user={user} />}>
-          <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<ProductListFormik />} />
         </Route>
       </Routes>
       <Toaster

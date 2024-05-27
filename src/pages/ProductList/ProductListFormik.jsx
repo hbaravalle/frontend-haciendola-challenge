@@ -3,142 +3,43 @@ import { useSelector } from "react-redux";
 import { Eye, Trash, Tag } from "feather-icons-react";
 import { Tooltip } from "react-tooltip";
 import toast from "react-hot-toast";
+
+import ModalUpdate from "../../pages/ProductList/modals/ModalUpdate";
+import ModalDelete from "../../pages/ProductList/modals/ModalDelete";
+import ModalCreate from "../../pages/ProductList/modals/ModalCreate";
+
 import Button from "../../components/Button";
 import Sidebar from "../../components/Sidebar";
 import Paginate from "../../components/Paginate";
-import ModalCreate from "./modals/ModalCreate";
 import styles from "./ProductList.module.scss";
 
-function ProductList() {
+function ProductListFormik() {
   const token = useSelector((state) => state.auth.token);
   const [products, setProducts] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  const [createModal, setCreateModal] = useState(false);
-  const handleShowCreateModal = () => setCreateModal(true);
-  const handleCloseCreateModal = () => setCreateModal(false);
-
-  // const [editModal, setEditModal] = useState(false);
-  // const handleShowEditModal = () => setEditModal(true);
-  // const handleCloseEditModal = () => setEditModal(false);
-
-  // const [deleteModal, setDeleteModal] = useState(false);
-  // const handleShowDeleteModal = () => setDeleteModal({ active: false });
-  // const handleCloseDeleteModal = () => setDeleteModal({ active: false });
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
   };
 
-  const handleProductCreate = async (newProduct) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/products`, {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: newProduct.title,
-          handle: newProduct.handle,
-          description: newProduct.description,
-          sku: newProduct.sku,
-          barcode: newProduct.barcode,
-          grams: newProduct.grams,
-          stock: newProduct.stock,
-          price: newProduct.price,
-          compare_price: newProduct.comparePrice,
-        }),
-      });
+  const handleShowCreateModal = () => setShowCreateModal(true);
+  const handleCloseCreateModal = () => setShowCreateModal(false);
 
-      const data = await response.json();
+  // const handleShowEditModal = () => setEditModal(true);
+  // const handleCloseEditModal = () => setEditModal(false);
 
-      if (data.status === 500 || data.status === 404) {
-        toast.error("Failed to create product");
-      }
-      if (data.status === 201) {
-        toast.success("Product created");
-        fetchProducts(currentPage);
-        handleCloseCreateModal();
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Server error. Try again");
-    }
-  };
+  // const handleShowDeleteModal = () => setDeleteModal(true);
+  // const handleCloseDeleteModal = () => setDeleteModal(false);
 
-  const handleProductUpdate = async (productData) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/products/${productData.sku}`,
-
-        {
-          method: "put",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title,
-            handle,
-            description,
-            sku,
-            barcode,
-            grams,
-            stock,
-            price,
-            comparePrice,
-          }),
-        }
-      );
-      const data = await response.json();
-      if (data.status === 500 || data.status === 404) {
-        toast.error("Update error");
-      }
-      if (data.status === 200) {
-        toast.success("Product updated");
-        fetchProducts(currentPage);
-        handleCloseEditModal();
-      }
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleProductDelete = async (sku) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/products/${sku}`,
-        {
-          method: "delete",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      if (data.status === 500 || data.status === 404) {
-        toast.error("Update error");
-      }
-      if (data.status === 200) {
-        toast.success("Product deleted");
-        fetchProducts(currentPage);
-        handleCloseDeleteModal();
-      }
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const paginateProps = { currentPage, totalPages, handlePageChange };
 
   const fetchProducts = async (page) => {
     try {
-      console.log(token);
       const response = await fetch(
         `http://localhost:3000/api/products?page=${page}`,
         {
@@ -148,17 +49,20 @@ function ProductList() {
           },
         }
       );
-      const { result: data } = await response.json();
-      console.log(data);
-      setProducts(data.products);
-      setTotalPages(data.totalPages);
-      setTotalProducts(data.count);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setProducts(data.result.products);
+        setTotalPages(data.result.totalPages);
+        setTotalProducts(data.result.count);
+      } else {
+        if (response.status === 404) console.log("Error 404");
+        if (response.status === 500) console.log("Error 500");
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
-
-  const paginateProps = { currentPage, totalPages, handlePageChange };
 
   useEffect(() => {
     fetchProducts(currentPage);
@@ -181,12 +85,6 @@ function ProductList() {
                   }}
                 >
                   <h1>Productos</h1>
-                  {/* <button
-                    className={styles.button__create}
-                    onClick={handleShowCreateModal}
-                  >
-                    + New product
-                  </button> */}
                   <Button
                     variant="primary"
                     onClick={handleShowCreateModal}
@@ -297,11 +195,14 @@ function ProductList() {
         </main>
       </div>
 
-      <ModalUpdate handleProductUpdate={handleProductUpdate} />
-      <ModalCreate handleProductCreate={handleProductCreate} />
-      <ModalDelete handleProductDelete={handleProductDelete} />
+      <ModalUpdate />
+      <ModalCreate
+        show={showCreateModal}
+        handleCloseCreateModal={handleCloseCreateModal}
+      />
+      <ModalDelete />
     </>
   );
 }
 
-export default ProductList;
+export default ProductListFormik;
