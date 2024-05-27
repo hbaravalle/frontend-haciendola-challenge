@@ -46,7 +46,10 @@ function Sidebar() {
           </ul>
         </nav>
       </div>
-      <button onClick={handleLogout}>
+      <button
+        className={styles["sidebar__button--submit"]}
+        onClick={handleLogout}
+      >
         <Power /> Logout
       </button>
     </div>

@@ -50,4 +50,12 @@
       }
     }
   }
+
+  &__button--submit {
+    border: none;
+    background-color: $color-accent;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius;
+  }
 }
