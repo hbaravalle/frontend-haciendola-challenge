@@ -34,6 +34,7 @@ function FormGroup({
           className={styles.formGroup__textarea}
           rows="4"
           defaultValue={value}
+          onChange={onChange}
         ></textarea>
       )}
     </div>

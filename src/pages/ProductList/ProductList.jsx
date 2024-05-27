@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Eye, Trash, Tag } from "feather-icons-react";
 import { Tooltip } from "react-tooltip";
 import { Modal } from "react-bootstrap";
@@ -9,6 +10,7 @@ import FormGroup from "../../components/FormGroup";
 import styles from "./ProductList.module.scss";
 
 function ProductList() {
+  const token = useSelector((state) => state.auth.token);
   const [products, setProducts] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -45,14 +47,20 @@ function ProductList() {
   });
 
   const handleNewTitleChange = (e) => setNewTitle(e.target.value);
-  const handleNewHandleChange = (e) => setNewHandle(e.target.value);
-  const handleNewDescriptionChange = (e) => setNewDescription(e.target.value);
+  const handleNewHandleChange = (e) => {
+    console.log("Handle handle handle");
+    setNewHandle(e.target.value);
+  };
+  const handleNewDescriptionChange = (e) => {
+    console.log("OK OK OK");
+    setNewDescription(e.target.value);
+  };
   const handleNewSkuChange = (e) => setNewSku(e.target.value);
   const handleNewBarcodeChange = (e) => setNewBarcode(e.target.value);
   const handleNewGramsChange = (e) => setNewGrams(e.target.value);
   const handleNewStockChange = (e) => setNewStock(e.target.value);
   const handleNewPriceChange = (e) => setNewPrice(e.target.value);
-  const handleNewComparePriceChange = (e) => setComparePrice(e.target.value);
+  const handleNewComparePriceChange = (e) => setNewComparePrice(e.target.value);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleHandleChange = (e) => setHandle(e.target.value);
@@ -70,10 +78,12 @@ function ProductList() {
         method: "post",
         headers: {
           "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: newTitle,
           handle: newHandle,
+          description: newDescription,
           sku: newSku,
           barcode: newBarcode,
           grams: newGrams,
@@ -86,7 +96,7 @@ function ProductList() {
       if (data.status === 500 || data.status === 404) {
         toast.error("Failed to create product");
       }
-      if (data.status === 200) {
+      if (data.status === 201) {
         toast.success("Product created");
         fetchProducts(currentPage);
         handleCloseCreateModal();
@@ -105,6 +115,7 @@ function ProductList() {
           method: "delete",
           headers: {
             "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -127,10 +138,12 @@ function ProductList() {
     try {
       const response = await fetch(
         `http://localhost:3000/api/products/${productData.sku}`,
+
         {
           method: "put",
           headers: {
             "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             title,
@@ -201,7 +214,13 @@ function ProductList() {
   const fetchProducts = async (page) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products?page=${page}`
+        `http://localhost:3000/api/products?page=${page}`,
+        {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const { result: data } = await response.json();
 
