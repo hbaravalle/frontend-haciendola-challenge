@@ -1,0 +1,18 @@
+-- ModealEdit
+<button onClick={handleCloseModal}>Close</button>
+<button>Save changes</button>
+
+-- Sidebar
+<button onClick={handleLogout}>
+    <Power /> Logout
+</button>
+
+-- NewPassword
+<button type="submit">Change password</button>
+
+-- ProductList
+<button className={styles.button__create} onClick={handleShowCreateModal}> + New product</button>
+<button className={styles.button__save} onClick={() => handleProductCreate()}>Save changes</button>
+<button onClick={handleCloseCreateModal} className={styles.button__close}>
+Close</button>
+

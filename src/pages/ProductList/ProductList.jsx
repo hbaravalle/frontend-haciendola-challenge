@@ -4,6 +4,7 @@ import { Eye, Trash, Tag } from "feather-icons-react";
 import { Tooltip } from "react-tooltip";
 import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
+import Button from "../../components/Button";
 import Sidebar from "../../components/Sidebar";
 import Paginate from "../../components/Paginate";
 import FormGroup from "../../components/FormGroup";
@@ -255,12 +256,19 @@ function ProductList() {
                   }}
                 >
                   <h1>Productos</h1>
-                  <button
+                  {/* <button
                     className={styles.button__create}
                     onClick={handleShowCreateModal}
                   >
                     + New product
-                  </button>
+                  </button> */}
+                  <Button
+                    variant="primary"
+                    onClick={handleShowCreateModal}
+                    style={{ marginTop: "-20px" }}
+                  >
+                    + New product
+                  </Button>
                 </header>
                 {products && (
                   <>
@@ -364,7 +372,6 @@ function ProductList() {
         </main>
       </div>
       <Modal show={editModal.active} onHide={handleCloseEditModal}>
-        {/* <Modal.Header closeButton></Modal.Header> */}
         <form action="" style={{ padding: "1rem", fontSize: "0.875rem" }}>
           <FormGroup
             title="Title"
