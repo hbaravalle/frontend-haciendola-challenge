@@ -49,15 +49,16 @@ function ProductListFormik() {
           },
         }
       );
-      if (response.ok) {
+      if (!response.ok) {
+        if (response.status === 404) console.log("Error 404");
+        if (response.status === 500) console.log("Error 500");
+      } else {
         const data = await response.json();
-        console.log(data);
+
         setProducts(data.result.products);
         setTotalPages(data.result.totalPages);
         setTotalProducts(data.result.count);
-      } else {
-        if (response.status === 404) console.log("Error 404");
-        if (response.status === 500) console.log("Error 500");
+        setCurrentPage(data.result.page);
       }
     } catch (err) {
       console.error(err);
@@ -73,7 +74,6 @@ function ProductListFormik() {
       <div className={styles.mainWrapper}>
         <Sidebar />
         <main>
-          {/* Navbar */}
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
@@ -95,98 +95,21 @@ function ProductListFormik() {
                 </header>
                 {products && (
                   <>
-                    <div className="table-responsive">
-                      <table className={styles.table}>
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>SKU</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Grams</th>
-                            <th>Stock</th>
-                            <th>Barcode</th>
-                            <th className="text-center">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {products.map((product) => {
-                            return (
-                              <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td>{product.sku}</td>
-                                <td>{product.title}</td>
-                                <td>
-                                  {product.price}{" "}
-                                  <span
-                                    style={{ textDecoration: "line-through" }}
-                                  >
-                                    ({product.compare_price})
-                                  </span>
-                                </td>
-                                <td>{product.grams}</td>
-                                <td>{product.stock}</td>
-                                <td className="text-center">
-                                  <span
-                                    style={{ cursor: "help" }}
-                                    data-tooltip-id={`tooltip-barcode-${product.barcode}`}
-                                    data-tooltip-content={product.barcode}
-                                  >
-                                    <Tag size="16" />
-                                  </span>
-                                  <Tooltip
-                                    id={`tooltip-barcode-${product.barcode}`}
-                                  />
-                                </td>
-                                <td>
-                                  <div className={styles.table__actions}>
-                                    <button
-                                      className={styles.table__actionButton}
-                                    >
-                                      <span
-                                        data-tooltip-id={`tooltip-detail-${product.id}`}
-                                        data-tooltip-content={"Detail"}
-                                        onClick={() =>
-                                          handleShowEditModal(product)
-                                        }
-                                      >
-                                        <Eye size="16" />
-                                      </span>
-                                      <Tooltip
-                                        id={`tooltip-detail-${product.id}`}
-                                      />
-                                    </button>
-                                    <button
-                                      className={styles.table__actionButton}
-                                    >
-                                      <span
-                                        data-tooltip-id={`tooltip-delete-${product.id}`}
-                                        data-tooltip-content={"Delete"}
-                                        onClick={() =>
-                                          handleShowDeleteModal(product)
-                                        }
-                                      >
-                                        <Trash size="16" />
-                                      </span>
-                                      <Tooltip
-                                        id={`tooltip-delete-${product.id}`}
-                                      />
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className={styles.table__info}>
-                      <small>
-                        {totalProducts} resultados <b>·</b> Mostrando{" "}
-                        {currentPage} de {totalPages} páginas
-                      </small>
-                      <Paginate {...paginateProps} />
-                    </div>
+                    <div className="productList__header"></div>
+                    {products.map((product) => (
+                      <div
+                        style={{
+                          border: "1px solid red",
+                          padding: "1rem",
+                          borderRadius: "0.2rem",
+                        }}
+                      >
+                        <div>
+                          <h2>Título del producto</h2>
+                          <small>titulo-del-producto</small>
+                        </div>
+                      </div>
+                    ))}
                   </>
                 )}
               </div>
@@ -199,6 +122,7 @@ function ProductListFormik() {
       <ModalCreate
         show={showCreateModal}
         handleCloseCreateModal={handleCloseCreateModal}
+        fetchProducts={fetchProducts}
       />
       <ModalDelete />
     </>

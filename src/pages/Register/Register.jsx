@@ -30,9 +30,10 @@ function Register() {
         },
         body: JSON.stringify({ name, username, email, password }),
       });
-      const data = await response.json();
-      if (data.status === 500) toast.error("Registration failed");
-      if (data.status === 201) {
+      if (!response.ok) {
+        if (data.status === 500) return toast.error("Registration failed");
+        return toast.error("Registration failed");
+      } else {
         toast.success("User created");
         navigate("/login");
       }

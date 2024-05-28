@@ -1,22 +1,60 @@
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import { object, string, number } from "yup";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import styles from "./Modals.module.scss";
 
 const ProductSchema = object({
-  title: string().required("Required"),
-  handle: string().required("Required"),
+  title: string().required("Campo requerido"),
+  handle: string().required("Campo requerido"),
   description: string(),
-  sku: number().required("Required"),
-  grams: number().required("Required"),
-  stock: number().required("Required"),
-  price: number().required("Required"),
-  comparePrice: number().required("Required"),
-  barcode: number().required("Required"),
+  sku: number().required("Campo requerido"),
+  grams: number().required("Campo requerido"),
+  stock: number().required("Campo requerido"),
+  price: number().required("Campo requerido"),
+  comparePrice: number().required("Campo requerido"),
+  barcode: number().required("Campo requerido"),
 });
 
-function ModalCreate({ show, handleCloseCreateModal }) {
-  const handleSubmit = async () => {};
+function ModalCreate({ show, handleCloseCreateModal, fetchProducts }) {
+  const token = useSelector((state) => state.auth.token);
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/products`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: values.title,
+          handle: values.handle,
+          description: values.description,
+          sku: values.sku,
+          barcode: values.barcode,
+          grams: values.grams,
+          stock: values.stock,
+          price: values.price,
+          compare_price: values.comparePrice,
+        }),
+      });
+
+      if (!response.ok) {
+        if (response.status === 404) toast.error("Failed to create product");
+        if (response.status === 500) toast.error("Failed to create product");
+        toast.error("Failed to create product");
+      } else {
+        await response.json();
+        toast.success("Product created");
+        handleCloseCreateModal();
+        fetchProducts(1);
+      }
+    } catch (err) {
+      console.error(err);
+      return toast.error("Server error. Try again");
+    }
+  };
 
   return (
     <Modal show={show} onHide={handleCloseCreateModal}>
@@ -34,7 +72,7 @@ function ModalCreate({ show, handleCloseCreateModal }) {
         }}
         validationSchema={ProductSchema}
         onSubmit={(values) => {
-          console.log(values);
+          handleSubmit(values);
         }}
       >
         {({ errors, touched }) => (
