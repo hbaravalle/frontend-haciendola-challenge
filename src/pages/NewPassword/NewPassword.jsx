@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import FormLayout from "../../layouts/Form/FormLayout";
+import FormLayout from "../../___layouts/Form/FormLayout";
 import FormGroup from "../../components/FormGroup";
 import { recover, setOtp } from "../../redux/authSlice";
 

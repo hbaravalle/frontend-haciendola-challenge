@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { login } from "../../redux/authSlice";
 import FormGroup from "../../components/FormGroup";
-import FormLayout from "../../layouts/Form/FormLayout";
+import FormLayout from "../../___layouts/Form/FormLayout";
 import styles from "./Login.module.scss";
 
 function Login() {
