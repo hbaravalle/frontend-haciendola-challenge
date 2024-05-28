@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
-import FormLayout from "../../___layouts/Form/FormLayout";
+import FormLayout from "../../layouts/Form/FormLayout";
 import FormGroup from "../../components/FormGroup";
 import toast from "react-hot-toast";
 

@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import FormLayout from "../../___layouts/Form/FormLayout";
+import FormLayout from "../../layouts/Form/FormLayout";
 import FormGroup from "../../components/FormGroup";
 import SendCodeToEmail from "./steps/SendCodeToEmail";
 import TypeOTP from "./steps/TypeOTP";
