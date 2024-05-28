@@ -94,12 +94,11 @@ https://github.com/hbaravalle/frontend-haciendola-challenge/assets/24690415/e31c
 
 De esta manera, se podrá probar la funcionalidad de reseteo de contraseña sin necesidad de enviar correos electrónicos reales, asegurando el funcione correctamente en un entorno controlado.
 
-## En desarrollo
-- [ ] Sumar validaciones
-- [ ] Detalles de diseño
+## En desarrollo (Branch refactor)
+- [ ] Formik y Yup para manejo de formularios y sus validaciones
 - [ ] Refactorización y modularización del componente ProductList
 - [ ] Refactorización y modularización general
-- [ ] customHooks
+- [ ] Detalles de diseño
 
 ---
 
