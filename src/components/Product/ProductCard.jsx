@@ -13,9 +13,7 @@ function ProductCard({ product, handleShowEditModal, handleShowDeleteModal }) {
         </div>
       </div>
       <div className={styles.ProductCard__centerSection}>
-        <h2 className={styles.productCard__title}>
-          {product.title}, {product.grams}g
-        </h2>
+        <h2 className={styles.productCard__title}>{product.title}</h2>
         <h3 className={styles.productCard__price}>
           ${product.price}
           <span className={styles.productCard__comparePrice}>
