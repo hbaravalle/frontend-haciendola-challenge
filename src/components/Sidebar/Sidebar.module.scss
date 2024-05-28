@@ -2,12 +2,14 @@
 
 .sidebar {
   display: flex;
+  position: fixed;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
   width: 200px;
   border-right: 1px solid $color-border;
   padding: 1rem;
+  background-color: #eef1f6;
 
   &__logo {
     max-width: 90%;

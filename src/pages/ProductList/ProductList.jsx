@@ -8,6 +8,7 @@ import Sidebar from "../../components/Sidebar";
 import Paginate from "../../components/Paginate";
 import FormGroup from "../../components/FormGroup";
 import styles from "./ProductList.module.scss";
+import ProductCard from "../../components/Product";
 
 function ProductList() {
   const token = useSelector((state) => state.auth.token);
@@ -48,11 +49,9 @@ function ProductList() {
 
   const handleNewTitleChange = (e) => setNewTitle(e.target.value);
   const handleNewHandleChange = (e) => {
-    console.log("Handle handle handle");
     setNewHandle(e.target.value);
   };
   const handleNewDescriptionChange = (e) => {
-    console.log("OK OK OK");
     setNewDescription(e.target.value);
   };
   const handleNewSkuChange = (e) => setNewSku(e.target.value);
@@ -128,7 +127,6 @@ function ProductList() {
         fetchProducts(currentPage);
         handleCloseDeleteModal();
       }
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -167,7 +165,6 @@ function ProductList() {
         fetchProducts(currentPage);
         handleCloseEditModal();
       }
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -192,7 +189,6 @@ function ProductList() {
   };
   const handleShowCreateModal = () => setCreateModal(true);
 
-  const handleCloseEditModal = () => setEditModal({ active: false });
   const handleShowEditModal = (product) => {
     setTitle(product.title);
     setHandle(product.handle);
@@ -205,11 +201,12 @@ function ProductList() {
     setComparePrice(product.compare_price);
     setEditModal({ active: true, ...product });
   };
+  const handleCloseEditModal = () => setEditModal({ active: false });
 
-  const handleCloseDeleteModal = () => setDeleteModal({ active: false });
   const handleShowDeleteModal = (product) => {
     setDeleteModal({ active: true, ...product });
   };
+  const handleCloseDeleteModal = () => setDeleteModal({ active: false });
 
   const fetchProducts = async (page) => {
     try {
@@ -243,8 +240,7 @@ function ProductList() {
       <div className={styles.mainWrapper}>
         <Sidebar />
         <main>
-          {/* Navbar */}
-          <div className="container-fluid">
+          <div className="container-fluid" style={{ paddingLeft: "200px" }}>
             <div className="row">
               <div className="col-12">
                 <header
@@ -259,96 +255,18 @@ function ProductList() {
                     className={styles.button__create}
                     onClick={handleShowCreateModal}
                   >
-                    + New product
+                    + Nuevo
                   </button>
                 </header>
                 {products && (
-                  <>
-                    <div className="table-responsive">
-                      <table className={styles.table}>
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>SKU</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Grams</th>
-                            <th>Stock</th>
-                            <th>Barcode</th>
-                            <th className="text-center">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {products.map((product) => {
-                            return (
-                              <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td>{product.sku}</td>
-                                <td>{product.title}</td>
-                                <td>
-                                  {product.price}{" "}
-                                  <span
-                                    style={{ textDecoration: "line-through" }}
-                                  >
-                                    ({product.compare_price})
-                                  </span>
-                                </td>
-                                <td>{product.grams}</td>
-                                <td>{product.stock}</td>
-                                <td className="text-center">
-                                  <span
-                                    style={{ cursor: "help" }}
-                                    data-tooltip-id={`tooltip-barcode-${product.barcode}`}
-                                    data-tooltip-content={product.barcode}
-                                  >
-                                    <Tag size="16" />
-                                  </span>
-                                  <Tooltip
-                                    id={`tooltip-barcode-${product.barcode}`}
-                                  />
-                                </td>
-                                <td>
-                                  <div className={styles.table__actions}>
-                                    <button
-                                      className={styles.table__actionButton}
-                                    >
-                                      <span
-                                        data-tooltip-id={`tooltip-detail-${product.id}`}
-                                        data-tooltip-content={"Detail"}
-                                        onClick={() =>
-                                          handleShowEditModal(product)
-                                        }
-                                      >
-                                        <Eye size="16" />
-                                      </span>
-                                      <Tooltip
-                                        id={`tooltip-detail-${product.id}`}
-                                      />
-                                    </button>
-                                    <button
-                                      className={styles.table__actionButton}
-                                    >
-                                      <span
-                                        data-tooltip-id={`tooltip-delete-${product.id}`}
-                                        data-tooltip-content={"Delete"}
-                                        onClick={() =>
-                                          handleShowDeleteModal(product)
-                                        }
-                                      >
-                                        <Trash size="16" />
-                                      </span>
-                                      <Tooltip
-                                        id={`tooltip-delete-${product.id}`}
-                                      />
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      padding: "1rem 0",
+                      gap: "1rem",
+                    }}
+                  >
                     <div className={styles.table__info}>
                       <small>
                         {totalProducts} resultados <b>·</b> Mostrando{" "}
@@ -356,7 +274,24 @@ function ProductList() {
                       </small>
                       <Paginate {...paginateProps} />
                     </div>
-                  </>
+                    {products.map((product) => {
+                      return (
+                        <ProductCard
+                          product={product}
+                          handleShowEditModal={handleShowEditModal}
+                          handleShowDeleteModal={handleShowDeleteModal}
+                        />
+                      );
+                    })}
+
+                    <div className={styles.table__info}>
+                      <small>
+                        {totalProducts} resultados <b>·</b> Mostrando{" "}
+                        {currentPage} de {totalPages} páginas
+                      </small>
+                      <Paginate {...paginateProps} />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -364,7 +299,6 @@ function ProductList() {
         </main>
       </div>
       <Modal show={editModal.active} onHide={handleCloseEditModal}>
-        {/* <Modal.Header closeButton></Modal.Header> */}
         <form action="" style={{ padding: "1rem", fontSize: "0.875rem" }}>
           <FormGroup
             title="Title"
@@ -462,7 +396,6 @@ function ProductList() {
         </div>
       </Modal>
       <Modal show={createModal} onHide={handleCloseCreateModal}>
-        {/* <Modal.Header closeButton></Modal.Header> */}
         <form action="" style={{ padding: "1rem", fontSize: "0.875rem" }}>
           <FormGroup
             title="Title"
